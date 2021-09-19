@@ -16,7 +16,7 @@ import math
 
 path_data='Path to stock market Data, example C:\\Users\\Hesam\\Projects\\Test'
 
-# how much money would you like to invest in each trade? edit money
+# how much money would you like to invest in each trade? edit money (IR Rial)
 money=50000000
 
 # your credentials for login in Mofid Trader website
