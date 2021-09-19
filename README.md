@@ -4,6 +4,7 @@ it is recommended to use Python platforms like Anaconda so that libraries are in
 https://www.anaconda.com/products/individual
 # library requirements:
 Pandas
+
 Selenium
 
 # How to Run:
