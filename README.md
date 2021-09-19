@@ -13,7 +13,7 @@ create a chrome profile for the robot so that cookies are saved and captcha is a
 
 run main.py
 
-# How do i get Historical Market data?
+# How do i get Historical Market data for Iran stock Market?
 use TSE Client
 
 you can get it from here:
