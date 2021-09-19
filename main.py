@@ -24,7 +24,6 @@ passw='PASSWORD'
 
 
 
-
 # value initiation
 
 time_now ='8:59:59'
