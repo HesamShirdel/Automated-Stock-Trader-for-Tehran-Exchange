@@ -13,6 +13,7 @@ Selenium
 
 # How do i get Historical Market data?
 use TSE Client
+
 you can get it from here:
 http://cdn.tsetmc.com/utils/getFile.aspx?Idn=16617
 
