@@ -10,4 +10,4 @@ Selenium
 # How to Run:
 1.run main.py
 
-# suggestions and feature requests are most welcome
+suggestions and feature requests are most welcome
