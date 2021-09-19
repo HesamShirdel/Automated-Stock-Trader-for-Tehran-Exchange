@@ -9,7 +9,9 @@ Pandas
 Selenium
 
 # How do i run it?
-1.run main.py
+create a chrome profile for the robot so that cookies are saved and captcha is avoided
+
+run main.py
 
 # How do i get Historical Market data?
 use TSE Client
