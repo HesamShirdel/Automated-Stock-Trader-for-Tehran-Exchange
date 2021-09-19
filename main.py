@@ -1,3 +1,4 @@
+from utils.Functions import robot
 from datetime import datetime
 import time
 import pandas as pd
@@ -6,7 +7,7 @@ from urllib.request import Request, urlopen
 import zlib
 import random
 import math
-from utils.Functions import robot
+
 
 
 #////////////////////////////////////////////////////////
