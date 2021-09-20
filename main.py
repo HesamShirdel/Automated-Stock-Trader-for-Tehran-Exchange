@@ -1,4 +1,4 @@
-from utils.Functions import robot
+from utils import func
 from datetime import datetime
 import time
 import pandas as pd
