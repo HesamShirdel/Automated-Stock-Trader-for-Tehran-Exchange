@@ -3,6 +3,9 @@ This robot trades stock with a swing strategy using Mofid Securities brokrage pl
 
 it is recommended to use Python platforms like Anaconda so that libraries are included by default
 https://www.anaconda.com/products/individual
+# Disclaimer: 
+USE AT YOUR OWN RISK. Creators do not take any responsibility for your trading results
+
 # library requirements:
 Pandas
 
