@@ -1,4 +1,3 @@
-from utils import func
 from datetime import datetime
 import time
 import pandas as pd
@@ -7,37 +6,24 @@ from urllib.request import Request, urlopen
 import zlib
 import random
 import math
+from utils import func
 
+path_data = 'C:\\Users\Hesam\\Projects\\Test\\Adjusted'
 
+money = 50000000
 
-#////////////////////////////////////////////////////////
-#////////////// IMPORTANT : EDIT THIS SECTION  /////////
-#//////////////////////////////////////////////////////
+user = '09301755952'
+passw = 'Sh62211116'
 
-path_data='Path to stock market Data, example C:\\Users\\Hesam\\Projects\\Test'
+time_now = '8:59:59'
+time_end = '12:23:00'
 
-# how much money would you like to invest in each trade? edit money (IR Rial)
-money=50000000
+Dirooz = 'دیروز'
+Naam = 'نماد'
+Kharid = 'خرید - قیمت'
+Forush = 'فروش - قیمت'
+Payani = 'قیمت پایانی - درصد'
 
-# your credentials for login in Mofid Trader website
-user='USERNAME'
-passw='PASSWORD'
-#////////////////////////////////////////////////////////
-#///////////////////////////////////////////////////////
-#//////////////////////////////////////////////////////
-
-
-# value initiation
-
-time_now ='8:59:59'
-time_end ='12:23:00'
-
-
-Dirooz='دیروز'
-Naam='نماد'
-Kharid='خرید - قیمت'
-Forush='فروش - قیمت'
-Payani='قیمت پایانی - درصد'
 
 # **************************************************
 # **************** BUY BOT *************************
@@ -51,42 +37,39 @@ def base_buy(stock, target_price):
     try:
 
         order_price = Price_list.loc[Price_list[Naam] == stock, Kharid].item()
-
+        sell_price = Price_list.loc[Price_list[Naam] == stock, Forush].item()
+        yesterday_price = Price_list.loc[Price_list[Naam] == stock, Dirooz].item()
     except:
         print('Can not get orderprice for Watch_Buy', stock)
         return 0
 
-    if func.watch_buy(stock, target_price, order_price) == 1:
+    if func.watch_buy(stock, target_price, order_price , sell_price , yesterday_price ) == 1:
 
         try:
 
-            sell_price = Price_list.loc[Price_list[Naam] == stock, Forush].item()
-            sell_price_str = str(math.floor(sell_price))
             print(sell_price_str)
 
-            if 10 < sell_price <= math.floor(
-                    1.05 * (Price_list.loc[Price_list[Naam] == stock, Dirooz].item())):
-                if sell_price < 1.025 * target_price:
 
-                    volume = round(money / (sell_price * 10)) * 10
-                    volume_str = str(volume)
-                    print('Buying ', stock)
-                    if func.buy(stock, sell_price_str, volume_str, money, user, passw) == 1:
-                        list1.append(stock)
-                        list1.append(sell_price)
-                        list1.append(volume_str)
+            if sell_price < 1.025 * target_price:
 
-                        return list1
-                    else:
+                volume = round(money / (sell_price * 10)) * 10
+                volume_str = str(volume)
+                print('Buying ', stock)
+                if func.buy(stock, sell_price_str, volume_str, money, user, passw) == 1:
+                    list1.append(stock)
+                    list1.append(sell_price)
+                    list1.append(volume_str)
 
-                        return
-
+                    return list1
                 else:
-                    print('Sellers Price is too high ', stock)
 
                     return
+
             else:
-                print('Buy Queue is full ', stock)
+                print('Sellers Price is too high ', stock)
+
+                return
+
 
         except:
 
@@ -105,7 +88,7 @@ def base_buy(stock, target_price):
 
         return
 
-    return
+
 
 
 # **************************************************
@@ -117,8 +100,8 @@ def base_sell(stock, target_price, volume, MA):
 
     list1 = []
     try:
-        yesterday_price = str(math.floor(Price_list.loc[Price_list[Naam] == stock, Dirooz].item()))
-        last_price = str(math.floor(Price_list.loc[Price_list[Naam] == stock, Payani].item()))
+        yesterday_price = Price_list.loc[Price_list[Naam] == stock, Dirooz].item()
+        last_price = Price_list.loc[Price_list[Naam] == stock, Payani].item()
         order_price = Price_list.loc[Price_list[Naam] == stock, Kharid].item()
 
     except:
@@ -196,6 +179,7 @@ while True:
 
     time_now = datetime.now().strftime("%H:%M:%S")
     if time_now > time_end:
+        print('Market is closed')
         break
 
     # if you want faster execution you can increase threadpool number for parallel execution
