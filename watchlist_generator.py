@@ -3,7 +3,18 @@ from datetime import datetime
 import glob
 import os
 
-path = 'C:\\Users\Hesam\\Projects\\Test\\Adjusted'
+# ****************************************
+# *********** Edit this Section **********
+# ****************************************
+
+
+path = '  change to folder where your historical data is saved.  example. C:\\Users\Hesam\\Projects\\Test\\Adjusted'
+
+
+# ****************************************
+# ****************************************
+# ****************************************
+
 allFiles = glob.glob(path + "/*.xls")
 
 for files in allFiles:
