@@ -6,7 +6,7 @@ https://www.anaconda.com/products/individual
 # Disclaimer: 
 USE AT YOUR OWN RISK. Creators do not take any responsibility for your trading results
 
-# library requirements:
+# Library requirements:
 Pandas
 
 Selenium
@@ -14,7 +14,9 @@ Selenium
 # How do i run it?
 create a chrome profile for the robot so that cookies are saved and captcha is avoided
 
-run main.py
+1. Download market historical data (read next section)
+2. run watchlist_generator.py to generate watchlist
+3. run main.py to start trading
 
 # How do i get Historical Market data for Iran stock Market?
 use TSE Client
