@@ -38,7 +38,7 @@ def base_buy(stock, target_price):
 
         order_price = Price_list.loc[Price_list[Naam] == stock, Kharid].item()
         sell_price = Price_list.loc[Price_list[Naam] == stock, Forush].item()
-        sell_price_str = str(sell_price)
+        sell_price_str = str(math.floor(sell_price))
         yesterday_price = Price_list.loc[Price_list[Naam] == stock, Dirooz].item()
     except:
         print('Can not get orderprice for Watch_Buy', stock)
