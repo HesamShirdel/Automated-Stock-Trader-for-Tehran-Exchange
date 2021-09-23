@@ -149,7 +149,7 @@ while ret < 8:
 
     except:
         ret += 1
-        print('that error again')
+        print('Don't worry')
 
 print(results)
 
