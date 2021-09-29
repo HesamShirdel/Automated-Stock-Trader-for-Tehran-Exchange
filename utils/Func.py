@@ -266,7 +266,7 @@ def sell(stock, price, volume, user, passw):
 # ************************************************************
 
 def watch_buy(stock, target, order_price, sell_price, yesterday_price):
-    if 0.999 * target <= order_price <= 1.01 * target:
+    if 1.01 * target <= order_price <= 1.02 * target:
         if 10 < sell_price <= math.floor(1.05 * yesterday_price):
 
             c_options = webdriver.ChromeOptions()
@@ -370,7 +370,7 @@ def watch_sell(stock, target, ma, order_price, yesterday_price, last_price):
             else:
                 return 0
 
-        elif order_price >= 1.041 * target:
+        elif order_price >= 1.035 * target:
 
             try:
                 temp1 = pd.read_excel('SellList.xlsx')
