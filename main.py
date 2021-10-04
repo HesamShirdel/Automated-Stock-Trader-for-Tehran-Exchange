@@ -253,6 +253,7 @@ while True:
     pool.close()
     pool.join()
     results1 = [i for i in results1 if i is not None]
+    results1 = [i for i in results1 if i != 0]
     print(results1)
 
     # exporting Results to excel file
