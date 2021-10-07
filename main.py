@@ -52,7 +52,9 @@ def base_buy(stock, target_price):
 
             if sell_price < 1.025 * target_price:
 
-                sell_price +=10
+                if sell_price < 1.05*math.floor(yesterday_price):
+                    sell_price +=10
+
                 sell_price_str = str(math.floor(sell_price))
                 volume = round(money / (sell_price * 10)) * 10
                 volume_str = str(volume)
