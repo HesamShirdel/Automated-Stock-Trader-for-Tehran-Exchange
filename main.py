@@ -241,7 +241,7 @@ while True:
         for q in range(0, len(sold_df['Name']), 1):
             data.drop(data.loc[data['Name'] == sold_df['Name'][q]].index, inplace=True)
 
-        data.to_excel(r'SellList.xlsx', index=False)
+        #data.to_excel(r'SellList.xlsx', index=False)
 
     except:
         pass
