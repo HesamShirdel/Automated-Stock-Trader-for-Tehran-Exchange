@@ -262,99 +262,109 @@ def sell(stock, price, volume, user, passw):
 
 
 # ************************************************************
-# ************ Price Monitor For Buying Function***************
+# ************ Buyers Power Calculator from TSETMC ***********
 # ************************************************************
 
+def power_tse(stock):
+
+    c_options = webdriver.ChromeOptions()
+    c_options.add_argument("headless")
+    # c_options.add_argument("disable-gpu")
+    c_options.add_argument(
+        "--user-data-dir=C:\\Users\\Hesam\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1")
+    c_options.add_argument("--disable-extensions")
+    chdriver = webdriver.Chrome(executable_path='./chromedriver.exe', options=c_options)
+    chdriver.set_window_size(1920, 1080)
+
+    retries = 1
+    while retries <= 5:
+
+        try:
+
+            chdriver.get("http://www.tsetmc.com/Loader.aspx?ParTree=15")
+            break
+
+        except:
+
+            time.sleep(5)
+            chdriver.refresh()
+            retries += 1
+            print('Can not Open TSETMC. Retrying', stock)
+
+    try:
+        chdriver.implicitly_wait(5)
+        chdriver.execute_script('ShowSearchWindow()')
+        # chdriver.find_element_by_xpath('/html/body/div[3]/div[2]/a[5]').click()
+        chdriver.implicitly_wait(5)
+        chdriver.find_element_by_xpath('/html/body/div[5]/section/div/input').click()
+        chdriver.implicitly_wait(5)
+        chdriver.find_element_by_xpath('/html/body/div[5]/section/div/input').send_keys(stock)
+        # chdriver.find_element_by_id('SearchKey').send_keys(keys.RETURN)
+
+        chdriver.find_element_by_xpath(
+            '/html/body/div[5]/section/div/div/div/div[2]/table/tbody/tr[1]/td[1]/a[contains(text(),stock)]').click()
+        chdriver.implicitly_wait(30)
+        time.sleep(15)
+
+        hagigi_buy = chdriver.find_element_by_xpath(
+            '/html/body/div[4]/form/div[3]/div[2]/div[1]/div[4]/div[1]/table/tbody/tr[2]/td[2]/div[1]').text
+        hagigi_buy = hagigi_buy.replace(",", "")
+        hagigi_buy = hagigi_buy.replace("M", "")
+        hagigi_buy_flo = float(hagigi_buy)
+
+        hagigi_sell = chdriver.find_element_by_xpath(
+            '/html/body/div[4]/form/div[3]/div[2]/div[1]/div[4]/div[1]/table/tbody/tr[2]/td[3]/div[1]').text
+        hagigi_sell = hagigi_sell.replace(",", "")
+        hagigi_sell = hagigi_sell.replace("M", "")
+        hagigi_sell_flo = float(hagigi_sell)
+
+        td_buy = chdriver.find_element_by_id('e5').text
+        td_buy = td_buy.replace(",", "")
+        td_buy_flo = float(td_buy)
+
+        td_sell = chdriver.find_element_by_id('e8').text
+        td_sell = td_sell.replace(",", "")
+        td_sell_flo = float(td_sell)
+
+        # print(hagigi_buy_flo/td_buy_flo)
+        # print(0.9*(hagigi_sell_flo/td_sell_flo))
+
+        if (hagigi_buy_flo / td_buy_flo) > 0.9 * (hagigi_sell_flo / td_sell_flo):
+
+            chdriver.close()
+            chdriver.quit()
+            return 1
+        else:
+            chdriver.close()
+            chdriver.quit()
+            print('Buy to Sell Ratio is not Optimal', stock)
+            return 0
+
+    except:
+        chdriver.close()
+        chdriver.quit()
+        print('Can not Calculate Buy to Sell Ratio Watch', stock)
+        return 1
+
+
+# *************************************************************
+# ************ Price Monitor For Buying Function***************
+# *************************************************************
+
 def watch_buy(stock, target, order_price, sell_price, yesterday_price):
-    if 1.01 * target <= order_price <= 1.02 * target:
+    if 1.008 * target <= order_price <= 1.02 * target:
         if 10 < sell_price < math.floor(1.05 * yesterday_price):
 
-            c_options = webdriver.ChromeOptions()
-            c_options.add_argument("headless")
-            # c_options.add_argument("disable-gpu")
-            c_options.add_argument(
-                "--user-data-dir=C:\\Users\\Hesam\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1")
-            c_options.add_argument("--disable-extensions")
-            chdriver = webdriver.Chrome(executable_path='./chromedriver.exe', options=c_options)
-            chdriver.set_window_size(1920, 1080)
-
-            retries = 1
-            while retries <= 5:
-
-                try:
-
-                    chdriver.get("http://www.tsetmc.com/Loader.aspx?ParTree=15")
-                    break
-
-                except:
-
-                    time.sleep(5)
-                    chdriver.refresh()
-                    retries += 1
-                    print('Can not Open TSETMC. Retrying', stock)
-
-            try:
-                chdriver.implicitly_wait(5)
-                chdriver.execute_script('ShowSearchWindow()')
-                # chdriver.find_element_by_xpath('/html/body/div[3]/div[2]/a[5]').click()
-                chdriver.implicitly_wait(5)
-                chdriver.find_element_by_xpath('/html/body/div[5]/section/div/input').click()
-                chdriver.implicitly_wait(5)
-                chdriver.find_element_by_xpath('/html/body/div[5]/section/div/input').send_keys(stock)
-                # chdriver.find_element_by_id('SearchKey').send_keys(keys.RETURN)
-
-                chdriver.find_element_by_xpath(
-                    '/html/body/div[5]/section/div/div/div/div[2]/table/tbody/tr[1]/td[1]/a[contains(text(),stock)]').click()
-                chdriver.implicitly_wait(30)
-                time.sleep(15)
-
-                hagigi_buy = chdriver.find_element_by_xpath(
-                    '/html/body/div[4]/form/div[3]/div[2]/div[1]/div[4]/div[1]/table/tbody/tr[2]/td[2]/div[1]').text
-                hagigi_buy = hagigi_buy.replace(",", "")
-                hagigi_buy = hagigi_buy.replace("M", "")
-                hagigi_buy_flo = float(hagigi_buy)
-
-                hagigi_sell = chdriver.find_element_by_xpath(
-                    '/html/body/div[4]/form/div[3]/div[2]/div[1]/div[4]/div[1]/table/tbody/tr[2]/td[3]/div[1]').text
-                hagigi_sell = hagigi_sell.replace(",", "")
-                hagigi_sell = hagigi_sell.replace("M", "")
-                hagigi_sell_flo = float(hagigi_sell)
-
-                td_buy = chdriver.find_element_by_id('e5').text
-                td_buy = td_buy.replace(",", "")
-                td_buy_flo = float(td_buy)
-
-                td_sell = chdriver.find_element_by_id('e8').text
-                td_sell = td_sell.replace(",", "")
-                td_sell_flo = float(td_sell)
-
-                # print(hagigi_buy_flo/td_buy_flo)
-                # print(0.9*(hagigi_sell_flo/td_sell_flo))
-
-                if (hagigi_buy_flo / td_buy_flo) > 0.9 * (hagigi_sell_flo / td_sell_flo):
-
-                    chdriver.close()
-                    chdriver.quit()
-                    return 1
-                else:
-                    chdriver.close()
-                    chdriver.quit()
-                    print('Buy to Sell Ratio is not Optimal', stock)
-                    return 0
-
-            except:
-                chdriver.close()
-                chdriver.quit()
-                print('Can not Calculate Buy to Sell Ratio Watch', stock)
-                return 1
+#            if power_tse(stock) == 1:
+#                return 1
+            return 1
         else:
             print('Buy Queue is full ', stock)
     else:
         return 0
 
-
 # ************************************************************
-# ************ Price Monitor For Selling Function***************
+# ************ Price Monitor For Selling Function*************
 # ************************************************************
 
 def watch_sell(stock, target, ma, order_price, yesterday_price, last_price):
