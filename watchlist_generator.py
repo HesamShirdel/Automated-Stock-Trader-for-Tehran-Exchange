@@ -3,18 +3,7 @@ from datetime import datetime
 import glob
 import os
 
-# ****************************************
-# *********** Edit this Section **********
-# ****************************************
-
-
-path = '  change to folder where your historical data is saved.  example. C:\\Users\Hesam\\Projects\\Test\\Adjusted'
-
-
-# ****************************************
-# ****************************************
-# ****************************************
-
+path = 'C:\\Users\Hesam\\Projects\\Test\\Adjusted'
 allFiles = glob.glob(path + "/*.xls")
 
 for files in allFiles:
@@ -149,7 +138,7 @@ while ret < 8:
 
     except:
         ret += 1
-        print('Don't worry')
+        print('that error again')
 
 print(results)
 
