@@ -3,6 +3,7 @@ from datetime import datetime
 import glob
 import os
 
+#Edit the Path to your Historical Market data folder
 path = 'C:\\Users\Hesam\\Projects\\Test\\Adjusted'
 allFiles = glob.glob(path + "/*.xls")
 
