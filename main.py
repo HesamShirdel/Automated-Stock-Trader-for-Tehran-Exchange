@@ -8,6 +8,7 @@ import random
 import math
 from utils import func
 
+#Edit the Path to your Historical Market data folder
 path_data = 'C:\\Users\Hesam\\Projects\\Test\\Adjusted'
 # Edit the Money amount for each transaction 
 money = 50000000
