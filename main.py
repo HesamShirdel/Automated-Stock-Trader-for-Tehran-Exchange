@@ -9,11 +9,11 @@ import math
 from utils import func
 
 path_data = 'C:\\Users\Hesam\\Projects\\Test\\Adjusted'
-
+# Edit the Money amount for each transaction 
 money = 50000000
-
-user = '09301755952'
-passw = 'Sh62211116'
+# Edit and add your Credentials 
+user = ''
+passw = ''
 
 time_now = '8:59:59'
 time_end = '12:23:00'
