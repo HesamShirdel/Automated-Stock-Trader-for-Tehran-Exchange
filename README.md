@@ -15,8 +15,8 @@ Selenium
 create a chrome profile for the robot so that cookies are saved and captcha is avoided
 
 1. Download market historical data (read next section)
-2. Run watchlist_generator.py to generate watchlist
-3. Run main.py to start trading (stocks from watchlist)
+2. Run watchlist_generator.py (or click Watchlist.bat in windows) to generate watchlist 
+3. Run main.py (or click Main.bat in windows) to start trading (stocks from watchlist)
 
 # How do i get Historical Market data for Iran stock Market?
 use TSE Client
