@@ -380,7 +380,7 @@ def watch_sell(stock, target, ma, order_price, yesterday_price, last_price):
             else:
                 return 0
 
-        elif order_price >= 1.035 * target:
+        elif order_price >= 1.03 * target:
 
             try:
                 temp1 = pd.read_excel('SellList.xlsx')
